@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>GNR Solo Cup</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c003e;
+            color: #fff;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 20px 0;
+            color: #ff3d7f;
+            text-transform: uppercase;
+        }
+
+        /* Dropdown containers */
+        .dropdown-container {
+            margin: 20px 0;
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-button {
+            background-color: #4b0082;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+            margin: 0 10px; /* spacing between "Seasons" and "Players" buttons */
+        }
+
+        .dropdown-button:hover {
+            background-color: #6a0dad;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #4b0082;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            z-index: 2;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* For both Seasons and Players item buttons in the dropdown */
+        .dropdown-content button {
+            background-color: #6a0dad;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 0;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #ff3d7f;
+        }
+
+        /* Seasons content */
+        .season-content {
+            display: none;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: #4b0082;
+            margin: 20px auto;
+            max-width: 700px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .winner-section {
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .winner-placeholder {
+            width: 100%;
+            max-width: 700px;
+            height: 200px;
+            background-color: #6a0dad;
+            margin: 20px auto;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 2rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .winner-title {
+            font-size: 4.0rem;
+            color: #ff3d7f;
+            text-transform: uppercase;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .schedule-header {
+            font-size: 2.5rem;
+            color: #ff3d7f;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Match styling */
+        .match {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #6a0dad;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .match-header {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #ff3d7f;
+            font-weight: bold;
+        }
+
+        .match-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .team {
+            font-size: 1.8rem;
+            flex: 1;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .score {
+            font-size: 2rem;
+            margin: 0 15px;
+            color: #ff3d7f;
+            font-weight: bold;
+        }
+
+        .divider {
+            font-size: 2.5rem;
+            color: #ff3d7f;
+            margin: 0 15px;
+        }
+
+        /* NEW: Small placeholder champ images for matches */
+        .champ-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background-color: #999;
+            margin: 0 10px;
+        }
+
+        /* Player Info Card */
+        .player-content {
+            display: none;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: #4b0082;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #6a0dad;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-photo {
+            width: 150px;
+            height: 150px;
+            background-color: #999;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .player-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff3d7f;
+            margin: 10px 0;
+        }
+
+        .player-stat {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        /* 
+           Container for the radar chart and 
+           the "Most Used Champs" box side by side 
+        */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .radar-chart-placeholder {
+            width: 300px;
+            height: 300px;
+            background-color: #4b0082;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-right: 20px; /* space between radar chart and champs box */
+        }
+
+        .most-used-champs {
+            background-color: #4b0082;
+            border-radius: 10px;
+            padding: 15px;
+            width: 220px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .champs-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #ff3d7f;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .champs-images {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+        .champs-images img {
+            width: 50px;
+            height: 50px;
+            background-color: #999;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>GNR Solo Cup</h1>
+
+    <!-- Seasons Dropdown -->
+    <div class="dropdown-container">
+        <button class="dropdown-button" onclick="toggleDropdown('dropdown-seasons')">Seasons</button>
+        <div id="dropdown-seasons" class="dropdown-content">
+            <button onclick="showSeason('season1')">S1</button>
+            <button onclick="showSeason('season2')">S2</button>
+            <button onclick="showSeason('season3')">S3</button>
+            <button onclick="showSeason('season4')">S4</button>
+            <button onclick="showSeason('season5')">S5</button>
+        </div>
+    </div>
+
+    <!-- Players Dropdown -->
+    <div class="dropdown-container">
+        <button class="dropdown-button" onclick="toggleDropdown('dropdown-players')">Players</button>
+        <div id="dropdown-players" class="dropdown-content">
+            <button onclick="showPlayer('JC')">JC</button>
+            <button onclick="showPlayer('Viper3')">Viper3</button>
+            <button onclick="showPlayer('Zuoyuan')">Zuoyuan</button>
+            <button onclick="showPlayer('Domoya')">Domoya</button>
+            <button onclick="showPlayer('Riyat')">Riyat</button>
+            <button onclick="showPlayer('张国荣')">张国荣</button>
+        </div>
+    </div>
+
+    <!-- Season 1 Content (example) -->
+    <div id="season1" class="season-content">
+        <div class="winner-section">
+            <div class="winner-title">S1 Winner</div>
+            <div class="winner-placeholder">ZUOYUAN</div>
+        </div>
+
+        <div class="schedule-header">Schedule</div>
+
+        <div class="match">
+            <div class="match-header">January 2025 | TBA | GNR TV</div>
+            <div class="match-body">
+                <!-- LEFT champ image placeholder -->
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+
+                <div class="team">Zuoyuan</div>
+                <div class="score">2</div>
+                <div class="divider">:</div>
+                <div class="score">0</div>
+                <div class="team">Domoya</div>
+                
+                <!-- RIGHT champ image placeholder -->
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-header">January 2025 | TBA | GNR TV</div>
+            <div class="match-body">
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+
+                <div class="team">Domoya</div>
+                <div class="score">2</div>
+                <div class="divider">:</div>
+                <div class="score">0</div>
+                <div class="team">JC</div>
+
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-header">January 2025 | TBA | GNR TV</div>
+            <div class="match-body">
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+
+                <div class="team">Domoya</div>
+                <div class="score">1</div>
+                <div class="divider">:</div>
+                <div class="score">2</div>
+                <div class="team">Viper3</div>
+
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-header">January 2025 | TBA | GNR TV</div>
+            <div class="match-body">
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+
+                <div class="team">Zuoyuan</div>
+                <div class="score">2</div>
+                <div class="divider">:</div>
+                <div class="score">1</div>
+                <div class="team">Viper3</div>
+
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+            </div>
+        </div>
+    </div>
+
+    <!-- Placeholder for other seasons -->
+    <div id="season2" class="season-content">
+        <div class="winner-section">
+            <div class="winner-title">S2 Winner</div>
+            <div class="winner-placeholder">TBD</div>
+        </div>
+        <div class="schedule-header">Schedule</div>
+        
+        <!-- Example match with placeholders -->
+        <div class="match">
+            <div class="match-header">Coming Soon...</div>
+            <div class="match-body">
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+
+                <div class="team">Player1</div>
+                <div class="score">0</div>
+                <div class="divider">:</div>
+                <div class="score">0</div>
+                <div class="team">Player2</div>
+
+                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+            </div>
+        </div>
+    </div>
+    <div id="season3" class="season-content">
+        <!-- You can add content here, including any match placeholders with champ images -->
+    </div>
+    <div id="season4" class="season-content">
+        <!-- You can add content here -->
+    </div>
+    <div id="season5" class="season-content">
+        <!-- You can add content here -->
+    </div>
+
+    <!-- Player Info Content Sections -->
+    <!-- JC -->
+    <div id="player-JC" class="player-content">
+        <div class="player-card">
+            <img 
+                src="images/participants/JC.jpg" 
+                alt="JC" 
+                class="player-photo"
+            />
+            <div class="player-name">JC</div>
+            <div class="player-stat">Winning Rate: N%</div>
+            
+            <!-- Radar & Champs Box -->
+            <div class="stats-container">
+                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
+                <div class="most-used-champs">
+                    <div class="champs-title">Most Used Champs</div>
+                    <div class="champs-images">
+                        <img src="image/champs/test.jpg" alt="Champion 1" />
+                        <img src="image/champs/test.jpg" alt="Champion 2" />
+                        <img src="image/champs/test.jpg" alt="Champion 3" />
+                    </div>
+                </div>
+            </div>
+            <!-- End Radar & Champs Box -->
+        </div>
+    </div>
+
+    <!-- Viper3 -->
+    <div id="player-Viper3" class="player-content">
+        <div class="player-card">
+            <img 
+                src="images/participants/Viper3.jpg" 
+                alt="Viper3" 
+                class="player-photo"
+            />
+            <div class="player-name">Viper3</div>
+            <div class="player-stat">Winning Rate: N%</div>
+            
+            <div class="stats-container">
+                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
+                <div class="most-used-champs">
+                    <div class="champs-title">Most Used Champs</div>
+                    <div class="champs-images">
+                        <img src="image/champs/test.jpg" alt="Champion 1" />
+                        <img src="image/champs/test.jpg" alt="Champion 2" />
+                        <img src="image/champs/test.jpg" alt="Champion 3" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zuoyuan -->
+    <div id="player-Zuoyuan" class="player-content">
+        <div class="player-card">
+            <img 
+                src="images/participants/Zuoyuan.jpg" 
+                alt="Zuoyuan" 
+                class="player-photo"
+            />
+            <div class="player-name">Zuoyuan</div>
+            <div class="player-stat">Winning Rate: N%</div>
+
+            <div class="stats-container">
+                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
+                <div class="most-used-champs">
+                    <div class="champs-title">Most Used Champs</div>
+                    <div class="champs-images">
+                        <img src="image/champs/test.jpg" alt="Champion 1" />
+                        <img src="image/champs/test.jpg" alt="Champion 2" />
+                        <img src="image/champs/test.jpg" alt="Champion 3" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Domoya -->
+    <div id="player-Domoya" class="player-content">
+        <div class="player-card">
+            <img 
+                src="images/participants/Domoya.jpg" 
+                alt="Domoya" 
+                class="player-photo"
+            />
+            <div class="player-name">Domoya</div>
+            <div class="player-stat">Winning Rate: N%</div>
+
+            <div class="stats-container">
+                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
+                <div class="most-used-champs">
+                    <div class="champs-title">Most Used Champs</div>
+                    <div class="champs-images">
+                        <img src="image/champs/test.jpg" alt="Champion 1" />
+                        <img src="image/champs/test.jpg" alt="Champion 2" />
+                        <img src="image/champs/test.jpg" alt="Champion 3" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Riyat -->
+    <div id="player-Riyat" class="player-content">
+        <div class="player-card">
+            <img 
+                src="images/participants/Riyat.jpg" 
+                alt="Riyat" 
+                class="player-photo"
+            />
+            <div class="player-name">Riyat</div>
+            <div class="player-stat">Winning Rate: N%</div>
+
+            <div class="stats-container">
+                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
+                <div class="most-used-champs">
+                    <div class="champs-title">Most Used Champs</div>
+                    <div class="champs-images">
+                        <img src="image/champs/test.jpg" alt="Champion 1" />
+                        <img src="image/champs/test.jpg" alt="Champion 2" />
+                        <img src="image/champs/test.jpg" alt="Champion 3" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 张国荣 -->
+    <div id="player-张国荣" class="player-content">
+        <div class="player-card">
+            <img 
+                src="images/participants/张国荣.jpg" 
+                alt="张国荣" 
+                class="player-photo"
+            />
+            <div class="player-name">张国荣</div>
+            <div class="player-stat">Winning Rate: N%</div>
+
+            <div class="stats-container">
+                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
+                <div class="most-used-champs">
+                    <div class="champs-title">Most Used Champs</div>
+                    <div class="champs-images">
+                        <img src="image/champs/test.jpg" alt="Champion 1" />
+                        <img src="image/champs/test.jpg" alt="Champion 2" />
+                        <img src="image/champs/test.jpg" alt="Champion 3" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Dropdown
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            if (!dropdown) return;
+            
+            // Close any other open dropdown
+            const allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(dd => {
+                if (dd !== dropdown) {
+                    dd.style.display = 'none';
+                }
+            });
+
+            // Toggle this dropdown
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+            } else {
+                dropdown.style.display = 'block';
+            }
+        }
+
+        // Hide dropdown if clicked outside
+        window.onclick = function(event) {
+            const allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(dropdown => {
+                // Check if click is outside the dropdown and its button
+                if (!dropdown.contains(event.target) && 
+                    event.target.className !== 'dropdown-button') {
+                    dropdown.style.display = 'none';
+                }
+            });
+        };
+
+        // Show Season content
+        function showSeason(seasonId) {
+            // Hide all season-content
+            const seasons = document.querySelectorAll('.season-content');
+            seasons.forEach(season => {
+                season.style.display = 'none';
+            });
+            // Hide all player-content
+            const players = document.querySelectorAll('.player-content');
+            players.forEach(player => {
+                player.style.display = 'none';
+            });
+
+            // Display the selected season
+            const selectedSeason = document.getElementById(seasonId);
+            if (selectedSeason) {
+                selectedSeason.style.display = 'block';
+            }
+        }
+
+        // Show Player content
+        function showPlayer(playerName) {
+            // Hide all season-content
+            const seasons = document.querySelectorAll('.season-content');
+            seasons.forEach(season => {
+                season.style.display = 'none';
+            });
+            // Hide all player-content
+            const players = document.querySelectorAll('.player-content');
+            players.forEach(player => {
+                player.style.display = 'none';
+            });
+
+            const playerId = 'player-' + playerName;
+            const selectedPlayer = document.getElementById(playerId);
+            if (selectedPlayer) {
+                selectedPlayer.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
