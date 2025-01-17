@@ -7,364 +7,383 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&display=swap');
 
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fdeff2; /* Main theme color */
-            color: #6f4e54; /* Darker text color for contrast */
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            margin: 20px 0;
-            color: #da627d; /* Accent heading color */
-            text-transform: uppercase;
-        }
-        
-        /* Dropdown containers */
-        .dropdown-container {
-            margin: 20px 0;
-            display: inline-block;
-            position: relative;
-        }
-        
-        .dropdown-button {
-            background-color: #f78fb3; /* Button background */
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1.2rem;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background-color 0.3s;
-            margin: 0 10px; /* spacing between buttons */
-        }
-        
-        .dropdown-button:hover {
-            background-color: #f35b8e; /* Hover color */
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f8bacd; /* Dropdown bg */
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            z-index: 2;
-            margin-top: 10px;
-            width: 100%;
-        }
-        
-        /* For both Seasons and Players item buttons in the dropdown */
-        .dropdown-content button {
-            background-color: #f78fb3;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            border-radius: 0;
-            font-size: 1rem;
-            text-transform: uppercase;
-            transition: background-color 0.3s;
-        }
-        
-        .dropdown-content button:hover {
-            background-color: #f35b8e;
-        }
-        
-        /* Seasons content */
-        .season-content {
-            display: none;
-            padding: 30px;
-            border-radius: 15px;
-            background-color: #f8bacd; /* Season section bg */
-            margin: 20px auto;
-            max-width: 700px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .winner-section {
-            margin-top: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .winner-placeholder {
-            width: 100%;
-            max-width: 700px;
-            height: 200px;
-            background-color: #f6c1cc; /* Winner placeholder bg */
-            margin: 20px auto;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #6f4e54;
-            font-size: 2rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-        
-        .winner-title {
-            font-size: 4.0rem;
-            color: #da627d; /* Accent for winner title */
-            text-transform: uppercase;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        
-        .schedule-header {
-            font-size: 2.5rem;
-            color: #da627d; /* Another accent usage */
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        
-        /* Match styling */
-        .match {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #f6c1cc; /* Match card bg */
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative; /* so we can position the arrow button to bottom right */
-        }
-        
-        .match-header {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: #da627d; 
-            font-weight: bold;
-        }
-        
-        .match-body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            position: relative;
-        }
-        
-        .team {
-            font-size: 1.8rem;
-            flex: 1;
-            text-align: center;
-            color: #6f4e54; /* Text color on lighter bg */
-            font-weight: bold;
-        }
-        
-        .score {
-            font-size: 2rem;
-            margin: 0 15px;
-            color: #da627d; /* Score accent */
-            font-weight: bold;
-        }
-        
-        .divider {
-            font-size: 2.5rem;
-            color: #da627d;
-            margin: 0 15px;
-        }
-        
-        /* Downward arrow button for toggling small matches */
-        .details-button {
-            background: transparent;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #da627d;
-            position: absolute;
-            bottom: 10px;
-            right: 15px;
-            transition: color 0.3s;
-        }
-        
-        .details-button:hover {
-            color: #f35b8e;
-        }
-
-        /* Hidden container for small matches */
-        .match-details-container {
-            display: none;
-            width: 100%;
-            background-color: #f8bacd;
-            margin-top: 15px;
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-        }
-
-        /* Each small match line */
-        .small-match {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 10px 0;
-        }
-        
-        .champ-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            background-color: #999;
-            margin: 0 10px;
-        }
-
-        /* Player Info Card */
-        .player-content {
-            display: none;
-            padding: 30px;
-            border-radius: 15px;
-            background-color: #f8bacd; /* Player content bg */
-            margin: 20px auto;
-            max-width: 600px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .player-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f6c1cc; /* Player card bg */
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .player-photo {
-            width: 150px;
-            height: 150px;
-            background-color: #999;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            object-fit: cover;
-        }
-        
-        .player-name {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #da627d; /* Name accent */
-            margin: 10px 0;
-        }
-        
-        .player-stat {
-            margin: 5px 0;
-            font-size: 1.1rem;
-            color: #6f4e54;
-        }
-        
-        /* Container for the radar chart and "Most Used Champs" box side by side */
-        .stats-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-            margin-top: 20px;
-        }
-        
-        .radar-chart-placeholder {
-            width: 300px;
-            height: 300px;
-            background-color: #f8bacd; /* Light accent */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6f4e54;
-            font-style: italic;
-            font-size: 1.2rem;
-            margin-right: 20px;
-        }
-        
-        .most-used-champs {
-            background-color: #f8bacd;
-            border-radius: 10px;
-            padding: 15px;
-            width: 220px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .champs-title {
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #da627d;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .champs-images {
-            display: flex;
-            justify-content: space-between;
-            gap: 5px;
-        }
-        
-        .champs-images img {
-            width: 50px;
-            height: 50px;
-            background-color: #999;
-            border-radius: 8px;
-        }
-
-        /* Leaderboard Content */
-        .leaderboard-content {
-            display: none;
-            padding: 30px;
-            border-radius: 15px;
-            background-color: #f8bacd;
-            margin: 20px auto;
-            max-width: 800px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .leaderboard-title {
-            font-size: 3rem;
-            color: #da627d;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .leaderboard-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-
-        .leaderboard-table th,
-        .leaderboard-table td {
-            padding: 12px 15px;
-            border: 2px solid #f6c1cc; 
-            text-align: center;
-        }
-
-        .leaderboard-table thead {
-            background-color: #f6c1cc;
-        }
-
-        .leaderboard-table th {
-            font-size: 1.2rem;
-            color: #6f4e54;
-            text-transform: uppercase;
-        }
-
-        .leaderboard-table td {
-            font-size: 1.1rem;
-            color: #6f4e54;
-        }
+    /* BODY & OVERALL THEME */
+    body {
+        font-family: 'Rajdhani', sans-serif;
+        margin: 0;
+        padding: 0;
+        /* A deep teal/blue background to match the fantasy vibe */
+        background-color: #1b2b2e;
+        color: #dcd3c9; /* Lighter, slightly warm text color */
+        text-align: center;
+      }
+  
+      .poster-container {
+        width: 70%;
+        margin: 0 auto;
+        max-height: 90vh;
+        overflow: hidden;
+        position: relative;
+      }
+      .poster-container img {
+        width: 100%;
+        display: block;
+        /* object-fit: cover; (optional, if you want uniform cropping) */
+      }
+  
+      /* HEADINGS */
+      h1 {
+        font-size: 3.5rem;
+        margin: 20px 0;
+        /* Glowing aqua for headings */
+        color: #78e4eb;
+        text-transform: uppercase;
+      }
+  
+      /* DROPDOWN CONTAINERS & BUTTONS */
+      .dropdown-container {
+        margin: 20px 0;
+        display: inline-block;
+        position: relative;
+      }
+      .dropdown-button {
+        background-color: #38494B; /* Muted stone-gray background for buttons */
+        color: #78e4eb;           /* Aqua text for contrast */
+        border: none;
+        padding: 12px 24px;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background-color 0.3s, color 0.3s;
+        margin: 0 10px; /* spacing between buttons */
+      }
+      .dropdown-button:hover {
+        background-color: #78e4eb;
+        color: #1b2b2e; /* Invert text color on hover for contrast */
+      }
+  
+      /* DROPDOWN CONTENT */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        /* Same stone-gray color but slightly lighter to stand out */
+        background-color: #2f3e40;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        z-index: 2;
+        margin-top: 10px;
+        width: 100%;
+      }
+      .dropdown-content button {
+        background-color: transparent; /* So it inherits parent color */
+        color: #dcd3c9;
+        padding: 10px 20px;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 1rem;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+      }
+      .dropdown-content button:hover {
+        background-color: #38494B; 
+        color: #78e4eb;
+      }
+  
+      /* SEASON CONTENT SECTION */
+      .season-content {
+        display: none;
+        padding: 30px;
+        border-radius: 15px;
+        /* Slightly darker box area */
+        background-color: #2f3e40;
+        margin: 20px auto;
+        max-width: 700px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+  
+      .winner-section {
+        margin-top: 20px;
+        margin-bottom: 40px;
+      }
+  
+      .winner-placeholder {
+        width: 100%;
+        max-width: 700px;
+        height: 200px;
+        background-color: #38494B; 
+        margin: 20px auto;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #dcd3c9;
+        font-size: 2rem;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+  
+      .winner-title {
+        font-size: 4.0rem;
+        color: #78e4eb;
+        text-transform: uppercase;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+  
+      .schedule-header {
+        font-size: 2.5rem;
+        color: #78e4eb;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+  
+      /* MATCH STYLING */
+      .match {
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #38494B; 
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative; 
+      }
+  
+      .match-header {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        color: #78e4eb;
+        font-weight: bold;
+      }
+  
+      .match-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: relative;
+      }
+  
+      .team {
+        font-size: 1.8rem;
+        flex: 1;
+        text-align: center;
+        color: #dcd3c9; 
+        font-weight: bold;
+      }
+  
+      .score {
+        font-size: 2rem;
+        margin: 0 15px;
+        color: #78e4eb; 
+        font-weight: bold;
+      }
+  
+      .divider {
+        font-size: 2.5rem;
+        color: #78e4eb;
+        margin: 0 15px;
+      }
+  
+      /* DOWN ARROW BUTTON FOR TOGGLING SMALL MATCHES */
+      .details-button {
+        background: transparent;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #78e4eb;
+        position: absolute;
+        bottom: 10px;
+        right: 15px;
+        transition: color 0.3s;
+      }
+      .details-button:hover {
+        color: #94f1f9; /* A brighter aqua on hover */
+      }
+  
+      /* HIDDEN CONTAINER FOR SMALL MATCHES */
+      .match-details-container {
+        display: none;
+        width: 100%;
+        background-color: #2f3e40;
+        margin-top: 15px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        padding: 10px;
+      }
+  
+      /* EACH SMALL MATCH LINE */
+      .small-match {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0;
+      }
+      .champ-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        background-color: #666;
+        margin: 0 10px;
+      }
+  
+      /* PLAYER CONTENT */
+      .player-content {
+        display: none;
+        padding: 30px;
+        border-radius: 15px;
+        background-color: #2f3e40; 
+        margin: 20px auto;
+        max-width: 600px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+  
+      .player-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #38494B; 
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+  
+      .player-photo {
+        width: 150px;
+        height: 150px;
+        background-color: #666;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        object-fit: cover;
+      }
+  
+      .player-name {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #78e4eb;
+        margin: 10px 0;
+      }
+  
+      .player-stat {
+        margin: 5px 0;
+        font-size: 1.1rem;
+        color: #dcd3c9;
+      }
+  
+      /* STATS CONTAINER */
+      .stats-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 20px;
+      }
+  
+      .radar-chart-placeholder {
+        width: 300px;
+        height: 300px;
+        background-color: #2f3e40;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dcd3c9;
+        font-style: italic;
+        font-size: 1.2rem;
+        margin-right: 20px;
+      }
+  
+      .most-used-champs {
+        background-color: #2f3e40;
+        border-radius: 10px;
+        padding: 15px;
+        width: 220px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+  
+      .champs-title {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #78e4eb;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+  
+      .champs-images {
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+      }
+  
+      .champs-images img {
+        width: 50px;
+        height: 50px;
+        background-color: #666;
+        border-radius: 8px;
+      }
+  
+      /* LEADERBOARD CONTENT */
+      .leaderboard-content {
+        display: none;
+        padding: 30px;
+        border-radius: 15px;
+        background-color: #2f3e40;
+        margin: 20px auto;
+        max-width: 800px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+  
+      .leaderboard-title {
+        font-size: 3rem;
+        color: #78e4eb;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+  
+      .leaderboard-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+      }
+  
+      .leaderboard-table thead {
+        background-color: #38494B;
+      }
+  
+      .leaderboard-table th,
+      .leaderboard-table td {
+        padding: 12px 15px;
+        border: 2px solid #2f3e40; 
+        text-align: center;
+      }
+  
+      .leaderboard-table th {
+        font-size: 1.2rem;
+        color: #dcd3c9;
+        text-transform: uppercase;
+      }
+  
+      .leaderboard-table td {
+        font-size: 1.1rem;
+        color: #dcd3c9;
+      }
     </style>
 </head>
 <body>
+    
     <h1>GNR Solo Cup</h1>
+
+    <div id="poster-container" class="poster-container">
+        <img src="image/poster.jpg" alt="GNR Solo Cup Poster">
+    </div>
 
     <!-- Seasons Dropdown -->
     <div class="dropdown-container">
@@ -407,7 +426,7 @@
 
         <!-- MATCH 1 -->
         <div class="match">
-            <div class="match-header">January 2025 | TBA | GNR TV</div>
+            <div class="match-header">January 2025 | GNR TV</div>
             <div class="match-body">
                 <div class="team">Zuoyuan</div>
                 <div class="score">2</div>
@@ -443,7 +462,7 @@
 
         <!-- MATCH 2 -->
         <div class="match">
-            <div class="match-header">January 2025 | TBA | GNR TV</div>
+            <div class="match-header">January 2025 | GNR TV</div>
             <div class="match-body">
                 <div class="team">Domoya</div>
                 <div class="score">2</div>
@@ -477,7 +496,7 @@
 
         <!-- MATCH 3 -->
         <div class="match">
-            <div class="match-header">January 2025 | TBA | GNR TV</div>
+            <div class="match-header">January 2025 | GNR TV</div>
             <div class="match-body">
                 <div class="team">Domoya</div>
                 <div class="score">1</div>
@@ -520,7 +539,7 @@
 
         <!-- MATCH 4 -->
         <div class="match">
-            <div class="match-header">January 2025 | TBA | GNR TV</div>
+            <div class="match-header">January 2025 | GNR TV</div>
             <div class="match-body">
                 <div class="team">Zuoyuan</div>
                 <div class="score">2</div>
