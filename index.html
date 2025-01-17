@@ -137,6 +137,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative; /* so we can position the arrow button to bottom right */
         }
         
         .match-header {
@@ -151,6 +152,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
+            position: relative;
         }
         
         .team {
@@ -174,7 +176,42 @@
             margin: 0 15px;
         }
         
-        /* Small placeholder champ images for matches */
+        /* Downward arrow button for toggling small matches */
+        .details-button {
+            background: transparent;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #da627d;
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .details-button:hover {
+            color: #f35b8e;
+        }
+
+        /* Hidden container for small matches */
+        .match-details-container {
+            display: none;
+            width: 100%;
+            background-color: #f8bacd;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+
+        /* Each small match line */
+        .small-match {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        
         .champ-img {
             width: 50px;
             height: 50px;
@@ -182,7 +219,7 @@
             background-color: #999;
             margin: 0 10px;
         }
-        
+
         /* Player Info Card */
         .player-content {
             display: none;
@@ -278,6 +315,52 @@
             border-radius: 8px;
         }
 
+        /* Leaderboard Content */
+        .leaderboard-content {
+            display: none;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: #f8bacd;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .leaderboard-title {
+            font-size: 3rem;
+            color: #da627d;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 12px 15px;
+            border: 2px solid #f6c1cc; 
+            text-align: center;
+        }
+
+        .leaderboard-table thead {
+            background-color: #f6c1cc;
+        }
+
+        .leaderboard-table th {
+            font-size: 1.2rem;
+            color: #6f4e54;
+            text-transform: uppercase;
+        }
+
+        .leaderboard-table td {
+            font-size: 1.1rem;
+            color: #6f4e54;
+        }
     </style>
 </head>
 <body>
@@ -308,6 +391,11 @@
         </div>
     </div>
 
+    <!-- Leaderboard Button -->
+    <div class="dropdown-container">
+        <button class="dropdown-button" onclick="showLeaderboard()">Leaderboard</button>
+    </div>
+
     <!-- Season 1 Content (example) -->
     <div id="season1" class="season-content">
         <div class="winner-section">
@@ -317,62 +405,159 @@
 
         <div class="schedule-header">Schedule</div>
 
+        <!-- MATCH 1 -->
         <div class="match">
             <div class="match-header">January 2025 | TBA | GNR TV</div>
             <div class="match-body">
-                <!-- LEFT champ image placeholder -->
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
-
                 <div class="team">Zuoyuan</div>
                 <div class="score">2</div>
                 <div class="divider">:</div>
                 <div class="score">0</div>
                 <div class="team">Domoya</div>
-                
-                <!-- RIGHT champ image placeholder -->
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+                <!-- Down arrow button -->
+                <button class="details-button" onclick="toggleMatchDetails('match1-details')">&#x25BC;</button>
+            </div>
+            <!-- Hidden small matches container -->
+            <div id="match1-details" class="match-details-container">
+                <!-- Suppose the big match was Bo3 (2:0) => two small matches below -->
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Zuoyuan</div>
+                    <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
+                    <div class="team">Domoya</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Zuoyuan</div>
+                    <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
+                    <div class="team">Domoya</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
             </div>
         </div>
+
+        <!-- MATCH 2 -->
         <div class="match">
             <div class="match-header">January 2025 | TBA | GNR TV</div>
             <div class="match-body">
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
-
                 <div class="team">Domoya</div>
                 <div class="score">2</div>
                 <div class="divider">:</div>
                 <div class="score">0</div>
                 <div class="team">JC</div>
-
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+                <button class="details-button" onclick="toggleMatchDetails('match2-details')">&#x25BC;</button>
+            </div>
+            <div id="match2-details" class="match-details-container">
+                <!-- Example small matches (2:0) -->
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Domoya</div>
+                    <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
+                    <div class="team">JC</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Domoya</div>
+                    <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
+                    <div class="team">JC</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
             </div>
         </div>
+
+        <!-- MATCH 3 -->
         <div class="match">
             <div class="match-header">January 2025 | TBA | GNR TV</div>
             <div class="match-body">
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
-
                 <div class="team">Domoya</div>
                 <div class="score">1</div>
                 <div class="divider">:</div>
                 <div class="score">2</div>
                 <div class="team">Viper3</div>
-
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+                <button class="details-button" onclick="toggleMatchDetails('match3-details')">&#x25BC;</button>
+            </div>
+            <div id="match3-details" class="match-details-container">
+                <!-- Example small matches for 1:2 -->
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Domoya</div>
+                    <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
+                    <div class="team">Viper3</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Domoya</div>
+                    <div class="score">0</div>
+                    <div class="divider">:</div>
+                    <div class="score">1</div>
+                    <div class="team">Viper3</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Domoya</div>
+                    <div class="score">0</div>
+                    <div class="divider">:</div>
+                    <div class="score">1</div>
+                    <div class="team">Viper3</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
             </div>
         </div>
+
+        <!-- MATCH 4 -->
         <div class="match">
             <div class="match-header">January 2025 | TBA | GNR TV</div>
             <div class="match-body">
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
-
                 <div class="team">Zuoyuan</div>
                 <div class="score">2</div>
                 <div class="divider">:</div>
                 <div class="score">1</div>
                 <div class="team">Viper3</div>
-
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+                <button class="details-button" onclick="toggleMatchDetails('match4-details')">&#x25BC;</button>
+            </div>
+            <div id="match4-details" class="match-details-container">
+                <!-- Example small matches for 2:1 -->
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Zuoyuan</div>
+                    <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
+                    <div class="team">Viper3</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Zuoyuan</div>
+                    <div class="score">0</div>
+                    <div class="divider">:</div>
+                    <div class="score">1</div>
+                    <div class="team">Viper3</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Zuoyuan</div>
+                    <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
+                    <div class="team">Viper3</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
             </div>
         </div>
     </div>
@@ -389,26 +574,103 @@
         <div class="match">
             <div class="match-header">Coming Soon...</div>
             <div class="match-body">
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
-
                 <div class="team">Player1</div>
                 <div class="score">0</div>
                 <div class="divider">:</div>
                 <div class="score">0</div>
                 <div class="team">Player2</div>
-
-                <img class="champ-img" src="image/champs/test.jpg" alt="Champion">
+                <button class="details-button" onclick="toggleMatchDetails('s2match1-details')">&#x25BC;</button>
+            </div>
+            <div id="s2match1-details" class="match-details-container">
+                <!-- Example small matches (0:0 placeholder) -->
+                <div class="small-match">
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <div class="team">Player1</div>
+                    <div class="score">0</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
+                    <div class="team">Player2</div>
+                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                </div>
             </div>
         </div>
     </div>
     <div id="season3" class="season-content">
-        <!-- You can add content here, including any match placeholders with champ images -->
+        <!-- You can add content here, including any match placeholders with the new structure -->
     </div>
     <div id="season4" class="season-content">
         <!-- You can add content here -->
     </div>
     <div id="season5" class="season-content">
         <!-- You can add content here -->
+    </div>
+
+    <!-- Leaderboard Content -->
+    <div id="leaderboard-content" class="leaderboard-content">
+        <div class="leaderboard-title">Leaderboard</div>
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Matches</th>
+                    <th>Win</th>
+                    <th>Lose</th>
+                    <th>Net Win</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example data (feel free to modify) -->
+                <tr>
+                    <td>JC</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>+1</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Viper3</td>
+                    <td>7</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>+3</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Zuoyuan</td>
+                    <td>6</td>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>+4</td>
+                    <td>14</td>
+                </tr>
+                <tr>
+                    <td>Domoya</td>
+                    <td>6</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>-2</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>Riyat</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>-2</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>张国荣</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>+2</td>
+                    <td>9</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- Player Info Content Sections -->
@@ -600,17 +862,7 @@
 
         // Show Season content
         function showSeason(seasonId) {
-            // Hide all season-content
-            const seasons = document.querySelectorAll('.season-content');
-            seasons.forEach(season => {
-                season.style.display = 'none';
-            });
-            // Hide all player-content
-            const players = document.querySelectorAll('.player-content');
-            players.forEach(player => {
-                player.style.display = 'none';
-            });
-
+            hideAllSections();
             // Display the selected season
             const selectedSeason = document.getElementById(seasonId);
             if (selectedSeason) {
@@ -620,21 +872,48 @@
 
         // Show Player content
         function showPlayer(playerName) {
-            // Hide all season-content
-            const seasons = document.querySelectorAll('.season-content');
-            seasons.forEach(season => {
-                season.style.display = 'none';
-            });
-            // Hide all player-content
-            const players = document.querySelectorAll('.player-content');
-            players.forEach(player => {
-                player.style.display = 'none';
-            });
-
+            hideAllSections();
             const playerId = 'player-' + playerName;
             const selectedPlayer = document.getElementById(playerId);
             if (selectedPlayer) {
                 selectedPlayer.style.display = 'block';
+            }
+        }
+
+        // Show Leaderboard
+        function showLeaderboard() {
+            hideAllSections();
+            const leaderboard = document.getElementById('leaderboard-content');
+            if (leaderboard) {
+                leaderboard.style.display = 'block';
+            }
+        }
+
+        // Hide all season-content, player-content, and leaderboard
+        function hideAllSections() {
+            const seasons = document.querySelectorAll('.season-content');
+            seasons.forEach(season => {
+                season.style.display = 'none';
+            });
+            const players = document.querySelectorAll('.player-content');
+            players.forEach(player => {
+                player.style.display = 'none';
+            });
+            const leaderboard = document.getElementById('leaderboard-content');
+            if (leaderboard) {
+                leaderboard.style.display = 'none';
+            }
+        }
+
+        // Toggle the small matches panel
+        function toggleMatchDetails(detailsId) {
+            const detailsDiv = document.getElementById(detailsId);
+            if (!detailsDiv) return;
+
+            if (detailsDiv.style.display === 'block') {
+                detailsDiv.style.display = 'none';
+            } else {
+                detailsDiv.style.display = 'block';
             }
         }
     </script>
