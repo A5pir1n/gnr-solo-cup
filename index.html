@@ -7,374 +7,337 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&display=swap');
 
-    /* BODY & OVERALL THEME */
-    body {
-        font-family: 'Rajdhani', sans-serif;
-        margin: 0;
-        padding: 0;
-        /* A deep teal/blue background to match the fantasy vibe */
-        background-color: #1b2b2e;
-        color: #dcd3c9; /* Lighter, slightly warm text color */
-        text-align: center;
-      }
-  
-      .poster-container {
-        width: 70%;
-        margin: 0 auto;
-        max-height: 90vh;
-        overflow: hidden;
-        position: relative;
-      }
-      .poster-container img {
-        width: 100%;
-        display: block;
-        /* object-fit: cover; (optional, if you want uniform cropping) */
-      }
-  
-      /* HEADINGS */
-      h1 {
-        font-size: 3.5rem;
-        margin: 20px 0;
-        /* Glowing aqua for headings */
-        color: #78e4eb;
-        text-transform: uppercase;
-      }
-  
-      /* DROPDOWN CONTAINERS & BUTTONS */
-      .dropdown-container {
-        margin: 20px 0;
-        display: inline-block;
-        position: relative;
-      }
-      .dropdown-button {
-        background-color: #38494B; /* Muted stone-gray background for buttons */
-        color: #78e4eb;           /* Aqua text for contrast */
-        border: none;
-        padding: 12px 24px;
-        font-size: 1.2rem;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        text-transform: uppercase;
-        transition: background-color 0.3s, color 0.3s;
-        margin: 0 10px; /* spacing between buttons */
-      }
-      .dropdown-button:hover {
-        background-color: #78e4eb;
-        color: #1b2b2e; /* Invert text color on hover for contrast */
-      }
-  
-      /* DROPDOWN CONTENT */
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        /* Same stone-gray color but slightly lighter to stand out */
-        background-color: #2f3e40;
-        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
-        border-radius: 8px;
-        z-index: 2;
-        margin-top: 10px;
-        width: 100%;
-      }
-      .dropdown-content button {
-        background-color: transparent; /* So it inherits parent color */
-        color: #dcd3c9;
-        padding: 10px 20px;
-        border: none;
-        width: 100%;
-        text-align: left;
-        cursor: pointer;
-        font-size: 1rem;
-        text-transform: uppercase;
-        transition: background-color 0.3s;
-      }
-      .dropdown-content button:hover {
-        background-color: #38494B; 
-        color: #78e4eb;
-      }
-  
-      /* SEASON CONTENT SECTION */
-      .season-content {
-        display: none;
-        padding: 30px;
-        border-radius: 15px;
-        /* Slightly darker box area */
-        background-color: #2f3e40;
-        margin: 20px auto;
-        max-width: 700px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      }
-  
-      .winner-section {
-        margin-top: 20px;
-        margin-bottom: 40px;
-      }
-  
-      .winner-placeholder {
-        width: 100%;
-        max-width: 700px;
-        height: 200px;
-        background-color: #38494B; 
-        margin: 20px auto;
-        border-radius: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #dcd3c9;
-        font-size: 2rem;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        text-transform: uppercase;
-        font-weight: bold;
-      }
-  
-      .winner-title {
-        font-size: 4.0rem;
-        color: #78e4eb;
-        text-transform: uppercase;
-        margin-top: 10px;
-        font-weight: bold;
-      }
-  
-      .schedule-header {
-        font-size: 2.5rem;
-        color: #78e4eb;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        font-weight: bold;
-      }
-  
-      /* MATCH STYLING */
-      .match {
-        margin: 20px 0;
-        padding: 20px;
-        background-color: #38494B; 
-        border-radius: 10px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative; 
-      }
-  
-      .match-header {
-        font-size: 1.4rem;
-        margin-bottom: 15px;
-        color: #78e4eb;
-        font-weight: bold;
-      }
-  
-      .match-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        position: relative;
-      }
-  
-      .team {
-        font-size: 1.8rem;
-        flex: 1;
-        text-align: center;
-        color: #dcd3c9; 
-        font-weight: bold;
-      }
-  
-      .score {
-        font-size: 2rem;
-        margin: 0 15px;
-        color: #78e4eb; 
-        font-weight: bold;
-      }
-  
-      .divider {
-        font-size: 2.5rem;
-        color: #78e4eb;
-        margin: 0 15px;
-      }
-  
-      /* DOWN ARROW BUTTON FOR TOGGLING SMALL MATCHES */
-      .details-button {
-        background: transparent;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-        color: #78e4eb;
-        position: absolute;
-        bottom: 10px;
-        right: 15px;
-        transition: color 0.3s;
-      }
-      .details-button:hover {
-        color: #94f1f9; /* A brighter aqua on hover */
-      }
-  
-      /* HIDDEN CONTAINER FOR SMALL MATCHES */
-      .match-details-container {
-        display: none;
-        width: 100%;
-        background-color: #2f3e40;
-        margin-top: 15px;
-        border-radius: 10px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        padding: 10px;
-      }
-  
-      /* EACH SMALL MATCH LINE */
-      .small-match {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 10px 0;
-      }
-      .champ-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 8px;
-        background-color: #666;
-        margin: 0 10px;
-      }
-  
-      /* PLAYER CONTENT */
-      .player-content {
-        display: none;
-        padding: 30px;
-        border-radius: 15px;
-        background-color: #2f3e40; 
-        margin: 20px auto;
-        max-width: 600px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      }
-  
-      .player-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: #38494B; 
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      }
-  
-      .player-photo {
-        width: 150px;
-        height: 150px;
-        background-color: #666;
-        border-radius: 50%;
-        margin-bottom: 20px;
-        object-fit: cover;
-      }
-  
-      .player-name {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #78e4eb;
-        margin: 10px 0;
-      }
-  
-      .player-stat {
-        margin: 5px 0;
-        font-size: 1.1rem;
-        color: #dcd3c9;
-      }
-  
-      /* STATS CONTAINER */
-      .stats-container {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        width: 100%;
-        margin-top: 20px;
-      }
-  
-      .radar-chart-placeholder {
-        width: 300px;
-        height: 300px;
-        background-color: #2f3e40;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #dcd3c9;
-        font-style: italic;
-        font-size: 1.2rem;
-        margin-right: 20px;
-      }
-  
-      .most-used-champs {
-        background-color: #2f3e40;
-        border-radius: 10px;
-        padding: 15px;
-        width: 220px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      }
-  
-      .champs-title {
-        font-weight: bold;
-        font-size: 1.2rem;
-        color: #78e4eb;
-        margin-bottom: 10px;
-        text-align: center;
-      }
-  
-      .champs-images {
-        display: flex;
-        justify-content: space-between;
-        gap: 5px;
-      }
-  
-      .champs-images img {
-        width: 50px;
-        height: 50px;
-        background-color: #666;
-        border-radius: 8px;
-      }
-  
-      /* LEADERBOARD CONTENT */
-      .leaderboard-content {
-        display: none;
-        padding: 30px;
-        border-radius: 15px;
-        background-color: #2f3e40;
-        margin: 20px auto;
-        max-width: 800px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      }
-  
-      .leaderboard-title {
-        font-size: 3rem;
-        color: #78e4eb;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        font-weight: bold;
-      }
-  
-      .leaderboard-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 0 auto;
-      }
-  
-      .leaderboard-table thead {
-        background-color: #38494B;
-      }
-  
-      .leaderboard-table th,
-      .leaderboard-table td {
-        padding: 12px 15px;
-        border: 2px solid #2f3e40; 
-        text-align: center;
-      }
-  
-      .leaderboard-table th {
-        font-size: 1.2rem;
-        color: #dcd3c9;
-        text-transform: uppercase;
-      }
-  
-      .leaderboard-table td {
-        font-size: 1.1rem;
-        color: #dcd3c9;
-      }
+        /* BODY & OVERALL THEME */
+        body {
+          font-family: 'Rajdhani', sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #1b2b2e; /* Teal/blue background */
+          color: #dcd3c9;           /* Light warm text color */
+          text-align: center;
+        }
+    
+        .poster-container {
+          width: 70%;
+          margin: 0 auto;
+          max-height: 90vh;
+          overflow: hidden;
+          position: relative;
+        }
+        .poster-container img {
+          width: 100%;
+          display: block;
+        }
+    
+        /* HEADINGS */
+        h1 {
+          font-size: 3.5rem;
+          margin: 20px 0;
+          color: #78e4eb; /* Aqua heading */
+          text-transform: uppercase;
+        }
+    
+        /* BUTTONS & DROPDOWNS */
+        .dropdown-container {
+          margin: 20px 0;
+          display: inline-block;
+          position: relative;
+        }
+        .dropdown-button {
+          background-color: #38494B;
+          color: #78e4eb;
+          border: none;
+          padding: 12px 24px;
+          font-size: 1.2rem;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: bold;
+          text-transform: uppercase;
+          transition: background-color 0.3s, color 0.3s;
+          margin: 0 10px;
+        }
+        .dropdown-button:hover {
+          background-color: #78e4eb;
+          color: #1b2b2e; /* invert on hover */
+        }
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #2f3e40;
+          box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+          border-radius: 8px;
+          z-index: 2;
+          margin-top: 10px;
+          width: 100%;
+        }
+        .dropdown-content button {
+          background-color: transparent;
+          color: #dcd3c9;
+          padding: 10px 20px;
+          border: none;
+          width: 100%;
+          text-align: left;
+          cursor: pointer;
+          font-size: 1rem;
+          text-transform: uppercase;
+          transition: background-color 0.3s;
+        }
+        .dropdown-content button:hover {
+          background-color: #38494B; 
+          color: #78e4eb;
+        }
+    
+        /* SEASONS CONTAINER */
+        .season-content {
+          display: none;
+          padding: 30px;
+          border-radius: 15px;
+          background-color: #2f3e40;
+          margin: 20px auto;
+          max-width: 700px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        .winner-section {
+          margin-top: 20px;
+          margin-bottom: 40px;
+        }
+        .winner-placeholder {
+          width: 100%;
+          max-width: 700px;
+          height: 200px;
+          background-color: #38494B; 
+          margin: 20px auto;
+          border-radius: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #dcd3c9;
+          font-size: 2rem;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+        .winner-title {
+          font-size: 4.0rem;
+          color: #78e4eb;
+          text-transform: uppercase;
+          margin-top: 10px;
+          font-weight: bold;
+        }
+        .schedule-header {
+          font-size: 2.5rem;
+          color: #78e4eb;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+          font-weight: bold;
+        }
+    
+        /* MATCHES */
+        .match {
+          margin: 20px 0;
+          padding: 20px;
+          background-color: #38494B; 
+          border-radius: 10px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative; 
+        }
+        .match-header {
+          font-size: 1.4rem;
+          margin-bottom: 15px;
+          color: #78e4eb;
+          font-weight: bold;
+        }
+        .match-body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          position: relative;
+        }
+        .team {
+          font-size: 1.8rem;
+          flex: 1;
+          text-align: center;
+          color: #dcd3c9; 
+          font-weight: bold;
+        }
+        .score {
+          font-size: 2rem;
+          margin: 0 15px;
+          color: #78e4eb; 
+          font-weight: bold;
+        }
+        .divider {
+          font-size: 2.5rem;
+          color: #78e4eb;
+          margin: 0 15px;
+        }
+        .details-button {
+          background: transparent;
+          border: none;
+          font-size: 2rem;
+          cursor: pointer;
+          color: #78e4eb;
+          position: absolute;
+          bottom: 10px;
+          right: 15px;
+          transition: color 0.3s;
+        }
+        .details-button:hover {
+          color: #94f1f9;
+        }
+        .match-details-container {
+          display: none;
+          width: 100%;
+          background-color: #2f3e40;
+          margin-top: 15px;
+          border-radius: 10px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+          padding: 10px;
+        }
+        .small-match {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 10px 0;
+        }
+        .champ-img {
+          width: 50px;
+          height: 50px;
+          border-radius: 8px;
+          background-color: #666;
+          margin: 0 10px;
+        }
+    
+        /* PLAYER SECTIONS */
+        .player-content {
+          display: none;
+          padding: 30px;
+          border-radius: 15px;
+          background-color: #2f3e40; 
+          margin: 20px auto;
+          max-width: 600px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        .player-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: #38494B; 
+          border-radius: 15px;
+          padding: 20px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        .player-photo {
+          width: 150px;
+          height: 150px;
+          background-color: #666;
+          border-radius: 50%;
+          margin-bottom: 20px;
+          object-fit: cover;
+        }
+        .player-name {
+          font-size: 2rem;
+          font-weight: bold;
+          color: #78e4eb;
+          margin: 10px 0;
+        }
+        .player-stat {
+          margin: 5px 0;
+          font-size: 1.1rem;
+          color: #dcd3c9;
+        }
+    
+        /* STATS CONTAINER + CHART */
+        .stats-container {
+          display: flex;
+          flex-direction: column; 
+          align-items: center; 
+          gap: 20px; /* space between champs and chart */
+        }
+        .most-used-champs {
+          background-color: #2f3e40;
+          border-radius: 10px;
+          padding: 15px;
+          width: 220px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        .champs-title {
+          font-weight: bold;
+          font-size: 1.2rem;
+          color: #78e4eb;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+        .champs-images {
+          display: flex;
+          justify-content: space-between;
+          gap: 5px;
+        }
+        .champs-images img {
+          width: 50px;
+          height: 50px;
+          background-color: #666;
+          border-radius: 8px;
+        }
+    
+        /* CHART-WRAPPER - forces radar to a fixed size & background */
+        .chart-wrapper {
+          width: 400px;     
+          height: 400px;    
+          background-color: #253234; /* custom background behind the radar */
+          border-radius: 10px;
+          padding: 20px;    
+        }
+        /* Force canvas to fill the wrapper */
+        .chart-wrapper canvas {
+          width: 100% !important; 
+          height: 100% !important;
+        }
+    
+        /* LEADERBOARD */
+        .leaderboard-content {
+          display: none;
+          padding: 30px;
+          border-radius: 15px;
+          background-color: #2f3e40;
+          margin: 20px auto;
+          max-width: 800px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        .leaderboard-title {
+          font-size: 3rem;
+          color: #78e4eb;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+          font-weight: bold;
+        }
+        .leaderboard-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 0 auto;
+        }
+        .leaderboard-table thead {
+          background-color: #38494B;
+        }
+        .leaderboard-table th,
+        .leaderboard-table td {
+          padding: 12px 15px;
+          border: 2px solid #2f3e40; 
+          text-align: center;
+        }
+        .leaderboard-table th {
+          font-size: 1.2rem;
+          color: #dcd3c9;
+          text-transform: uppercase;
+        }
+        .leaderboard-table td {
+          font-size: 1.1rem;
+          color: #dcd3c9;
+        }
     </style>
 </head>
 <body>
@@ -440,22 +403,22 @@
             <div id="match1-details" class="match-details-container">
                 <!-- Suppose the big match was Bo3 (2:0) => two small matches below -->
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Fiora.webp" alt="Champion" />
                     <div class="team">Zuoyuan</div>
                     <div class="score">1</div>
                     <div class="divider">:</div>
                     <div class="score">0</div>
                     <div class="team">Domoya</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Shen.webp" alt="Champion" />
                 </div>
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Aurora.webp" alt="Champion" />
                     <div class="team">Zuoyuan</div>
                     <div class="score">1</div>
                     <div class="divider">:</div>
                     <div class="score">0</div>
                     <div class="team">Domoya</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Cho_Gath.webp" alt="Champion" />
                 </div>
             </div>
         </div>
@@ -474,22 +437,22 @@
             <div id="match2-details" class="match-details-container">
                 <!-- Example small matches (2:0) -->
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Shen.webp" alt="Champion" />
                     <div class="team">Domoya</div>
                     <div class="score">1</div>
                     <div class="divider">:</div>
                     <div class="score">0</div>
                     <div class="team">JC</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Camille.webp" alt="Champion" />
                 </div>
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Aatrox.webp" alt="Champion" />
                     <div class="team">Domoya</div>
                     <div class="score">1</div>
                     <div class="divider">:</div>
                     <div class="score">0</div>
                     <div class="team">JC</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/KSante.webp" alt="Champion" />
                 </div>
             </div>
         </div>
@@ -508,31 +471,31 @@
             <div id="match3-details" class="match-details-container">
                 <!-- Example small matches for 1:2 -->
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Tahm Kench.webp" alt="Champion" />
                     <div class="team">Domoya</div>
-                    <div class="score">1</div>
-                    <div class="divider">:</div>
                     <div class="score">0</div>
+                    <div class="divider">:</div>
+                    <div class="score">1</div>
                     <div class="team">Viper3</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Aatrox.webp" alt="Champion" />
                 </div>
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Sion.webp" alt="Champion" />
                     <div class="team">Domoya</div>
-                    <div class="score">0</div>
-                    <div class="divider">:</div>
                     <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
                     <div class="team">Viper3</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Fiora.webp" alt="Champion" />
                 </div>
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Nasus.webp" alt="Champion" />
                     <div class="team">Domoya</div>
                     <div class="score">0</div>
                     <div class="divider">:</div>
                     <div class="score">1</div>
                     <div class="team">Viper3</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Sett.webp" alt="Champion" />
                 </div>
             </div>
         </div>
@@ -551,31 +514,31 @@
             <div id="match4-details" class="match-details-container">
                 <!-- Example small matches for 2:1 -->
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Yone.webp" alt="Champion" />
                     <div class="team">Zuoyuan</div>
-                    <div class="score">1</div>
-                    <div class="divider">:</div>
                     <div class="score">0</div>
+                    <div class="divider">:</div>
+                    <div class="score">1</div>
                     <div class="team">Viper3</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Fiora.webp" alt="Champion" />
                 </div>
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Renekton.webp" alt="Champion" />
                     <div class="team">Zuoyuan</div>
-                    <div class="score">0</div>
-                    <div class="divider">:</div>
                     <div class="score">1</div>
+                    <div class="divider">:</div>
+                    <div class="score">0</div>
                     <div class="team">Viper3</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Jayce.webp" alt="Champion" />
                 </div>
                 <div class="small-match">
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/jax.webp" alt="Champion" />
                     <div class="team">Zuoyuan</div>
                     <div class="score">1</div>
                     <div class="divider">:</div>
                     <div class="score">0</div>
                     <div class="team">Viper3</div>
-                    <img class="champ-img" src="image/champs/test.jpg" alt="Champion" />
+                    <img class="champ-img" src="image/champs/Aatrox.webp" alt="Champion" />
                 </div>
             </div>
         </div>
@@ -693,158 +656,148 @@
     </div>
 
     <!-- Player Info Content Sections -->
-    <!-- JC -->
-    <div id="player-JC" class="player-content">
-        <div class="player-card">
-            <img 
-                src="images/participants/JC.jpg" 
-                alt="JC" 
-                class="player-photo"
-            />
-            <div class="player-name">JC</div>
-            <div class="player-stat">Winning Rate: N%</div>
-            
-            <!-- Radar & Champs Box -->
-            <div class="stats-container">
-                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
-                <div class="most-used-champs">
-                    <div class="champs-title">Most Used Champs</div>
-                    <div class="champs-images">
-                        <img src="image/champs/test.jpg" alt="Champion 1" />
-                        <img src="image/champs/test.jpg" alt="Champion 2" />
-                        <img src="image/champs/test.jpg" alt="Champion 3" />
-                    </div>
-                </div>
-            </div>
-            <!-- End Radar & Champs Box -->
+
+  <!-- JC -->
+  <div id="player-JC" class="player-content">
+    <div class="player-card">
+      <img src="images/participants/JC.jpg" alt="JC" class="player-photo" />
+      <div class="player-name">JC</div>
+      <div class="player-stat">Winning Rate: N%</div>
+
+      <div class="stats-container">
+        <!-- Champs box on top -->
+        <div class="most-used-champs">
+          <div class="champs-title">Most Used Champs</div>
+          <div class="champs-images">
+            <img src="image/champs/Camille.webp" alt="Champion 1" />
+            <img src="image/champs/KSante.webp" alt="Champion 2" />
+            <img src="image/champs/test.jpg" alt="Champion 3" />
+          </div>
         </div>
-    </div>
 
-    <!-- Viper3 -->
-    <div id="player-Viper3" class="player-content">
-        <div class="player-card">
-            <img 
-                src="images/participants/Viper3.jpg" 
-                alt="Viper3" 
-                class="player-photo"
-            />
-            <div class="player-name">Viper3</div>
-            <div class="player-stat">Winning Rate: N%</div>
-            
-            <div class="stats-container">
-                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
-                <div class="most-used-champs">
-                    <div class="champs-title">Most Used Champs</div>
-                    <div class="champs-images">
-                        <img src="image/champs/test.jpg" alt="Champion 1" />
-                        <img src="image/champs/test.jpg" alt="Champion 2" />
-                        <img src="image/champs/test.jpg" alt="Champion 3" />
-                    </div>
-                </div>
-            </div>
+        <!-- Radar below in a .chart-wrapper -->
+        <div class="chart-wrapper">
+          <canvas id="chart-JC"></canvas>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Zuoyuan -->
-    <div id="player-Zuoyuan" class="player-content">
-        <div class="player-card">
-            <img 
-                src="images/participants/Zuoyuan.jpg" 
-                alt="Zuoyuan" 
-                class="player-photo"
-            />
-            <div class="player-name">Zuoyuan</div>
-            <div class="player-stat">Winning Rate: N%</div>
+  <!-- Viper3 -->
+  <div id="player-Viper3" class="player-content">
+    <div class="player-card">
+      <img src="images/participants/Viper3.jpg" alt="Viper3" class="player-photo" />
+      <div class="player-name">Viper3</div>
+      <div class="player-stat">Winning Rate: N%</div>
 
-            <div class="stats-container">
-                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
-                <div class="most-used-champs">
-                    <div class="champs-title">Most Used Champs</div>
-                    <div class="champs-images">
-                        <img src="image/champs/test.jpg" alt="Champion 1" />
-                        <img src="image/champs/test.jpg" alt="Champion 2" />
-                        <img src="image/champs/test.jpg" alt="Champion 3" />
-                    </div>
-                </div>
-            </div>
+      <div class="stats-container">
+        <div class="most-used-champs">
+          <div class="champs-title">Most Used Champs</div>
+          <div class="champs-images">
+            <img src="image/champs/Aatrox.webp" alt="Champion 1" />
+            <img src="image/champs/Fiora.webp" alt="Champion 2" />
+            <img src="image/champs/Sett.webp" alt="Champion 3" />
+          </div>
         </div>
-    </div>
-
-    <!-- Domoya -->
-    <div id="player-Domoya" class="player-content">
-        <div class="player-card">
-            <img 
-                src="images/participants/Domoya.jpg" 
-                alt="Domoya" 
-                class="player-photo"
-            />
-            <div class="player-name">Domoya</div>
-            <div class="player-stat">Winning Rate: N%</div>
-
-            <div class="stats-container">
-                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
-                <div class="most-used-champs">
-                    <div class="champs-title">Most Used Champs</div>
-                    <div class="champs-images">
-                        <img src="image/champs/test.jpg" alt="Champion 1" />
-                        <img src="image/champs/test.jpg" alt="Champion 2" />
-                        <img src="image/champs/test.jpg" alt="Champion 3" />
-                    </div>
-                </div>
-            </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-Viper3"></canvas>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Riyat -->
-    <div id="player-Riyat" class="player-content">
-        <div class="player-card">
-            <img 
-                src="images/participants/Riyat.jpg" 
-                alt="Riyat" 
-                class="player-photo"
-            />
-            <div class="player-name">Riyat</div>
-            <div class="player-stat">Winning Rate: N%</div>
+  <!-- Zuoyuan -->
+  <div id="player-Zuoyuan" class="player-content">
+    <div class="player-card">
+      <img src="images/participants/Zuoyuan.jpg" alt="Zuoyuan" class="player-photo" />
+      <div class="player-name">Zuoyuan</div>
+      <div class="player-stat">Winning Rate: N%</div>
 
-            <div class="stats-container">
-                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
-                <div class="most-used-champs">
-                    <div class="champs-title">Most Used Champs</div>
-                    <div class="champs-images">
-                        <img src="image/champs/test.jpg" alt="Champion 1" />
-                        <img src="image/champs/test.jpg" alt="Champion 2" />
-                        <img src="image/champs/test.jpg" alt="Champion 3" />
-                    </div>
-                </div>
-            </div>
+      <div class="stats-container">
+        <div class="most-used-champs">
+          <div class="champs-title">Most Used Champs</div>
+          <div class="champs-images">
+            <img src="image/champs/Fiora.webp" alt="Champion 1" />
+            <img src="image/champs/Aurora.webp" alt="Champion 2" />
+            <img src="image/champs/Yone.webp" alt="Champion 3" />
+          </div>
         </div>
-    </div>
-
-    <!-- 张国荣 -->
-    <div id="player-张国荣" class="player-content">
-        <div class="player-card">
-            <img 
-                src="images/participants/张国荣.jpg" 
-                alt="张国荣" 
-                class="player-photo"
-            />
-            <div class="player-name">张国荣</div>
-            <div class="player-stat">Winning Rate: N%</div>
-
-            <div class="stats-container">
-                <div class="radar-chart-placeholder">Radar Chart Placeholder</div>
-                <div class="most-used-champs">
-                    <div class="champs-title">Most Used Champs</div>
-                    <div class="champs-images">
-                        <img src="image/champs/test.jpg" alt="Champion 1" />
-                        <img src="image/champs/test.jpg" alt="Champion 2" />
-                        <img src="image/champs/test.jpg" alt="Champion 3" />
-                    </div>
-                </div>
-            </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-Zuoyuan"></canvas>
         </div>
+      </div>
     </div>
+  </div>
 
+  <!-- Domoya -->
+  <div id="player-Domoya" class="player-content">
+    <div class="player-card">
+      <img src="images/participants/Domoya.jpg" alt="Domoya" class="player-photo" />
+      <div class="player-name">Domoya</div>
+      <div class="player-stat">Winning Rate: N%</div>
+
+      <div class="stats-container">
+        <div class="most-used-champs">
+          <div class="champs-title">Most Used Champs</div>
+          <div class="champs-images">
+            <img src="image/champs/Shen.webp" alt="Champion 1" />
+            <img src="image/champs/Cho_Gath.webp" alt="Champion 2" />
+            <img src="image/champs/Aatrox.webp" alt="Champion 3" />
+          </div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-Domoya"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Riyat -->
+  <div id="player-Riyat" class="player-content">
+    <div class="player-card">
+      <img src="images/participants/Riyat.jpg" alt="Riyat" class="player-photo" />
+      <div class="player-name">Riyat</div>
+      <div class="player-stat">Winning Rate: N%</div>
+
+      <div class="stats-container">
+        <div class="most-used-champs">
+          <div class="champs-title">Most Used Champs</div>
+          <div class="champs-images">
+            <img src="image/champs/test.jpg" alt="Champion 1" />
+            <img src="image/champs/test.jpg" alt="Champion 2" />
+            <img src="image/champs/test.jpg" alt="Champion 3" />
+          </div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-Riyat"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 张国荣 -->
+  <div id="player-张国荣" class="player-content">
+    <div class="player-card">
+      <img src="images/participants/张国荣.jpg" alt="张国荣" class="player-photo" />
+      <div class="player-name">张国荣</div>
+      <div class="player-stat">Winning Rate: N%</div>
+
+      <div class="stats-container">
+        <div class="most-used-champs">
+          <div class="champs-title">Most Used Champs</div>
+          <div class="champs-images">
+            <img src="image/champs/test.jpg" alt="Champion 1" />
+            <img src="image/champs/test.jpg" alt="Champion 2" />
+            <img src="image/champs/test.jpg" alt="Champion 3" />
+          </div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-张国荣"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Toggle Dropdown
         function toggleDropdown(dropdownId) {
@@ -935,6 +888,204 @@
                 detailsDiv.style.display = 'block';
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1) For each dimension, store a label plus its min & max (from your data range).
+            const dimensionStats = [
+              { label: "Winrate",         min: 0.0,       max: 0.8       },
+              { label: "Average Damage",  min: 4.846319,  max: 5.894415  },
+              { label: "Average CS",      min: 0,  max: 0.1  },
+              { label: "Variation",       min: 0.5,  max: 1.0       },
+              { label: "Speed",           min: 0.0,       max: 300}
+            ];
+          
+            // 2) Your original data (raw values).
+            // Make sure the array order matches the dimensionStats above.
+            const dataMap = {
+              "Domoya": [0.428571, 5.894415, 0.061186, 0.857143, 169.33333],
+              "JC":      [0.000000, 4.846319, 0.072447, 1.000000,   0.000000],
+              "Viper3":  [0.500000, 5.180586, 0.081743, 0.666667, 128.66667],
+              "Zuoyuan": [0.800000, 5.685330, 0.048384, 1.000000, 289.00000]
+            };
+          
+            // 3) A helper to convert raw data -> 0..100 range for each dimension.
+            function normalizePlayerData(playerName) {
+              const raw = dataMap[playerName];
+              return raw.map((value, index) => {
+                const { min, max } = dimensionStats[index];
+                return ((value - min) / (max - min)) * 100; // scaled to 0..100
+              });
+            }
+          
+            // --- Domoya ---
+            if (document.getElementById("chart-Domoya")) {
+                new Chart(document.getElementById("chart-Domoya"), {
+                  type: 'radar',
+                  data: {
+                    labels: dimensionStats.map(d => d.label),
+                    datasets: [{
+                      label: 'Domoya',
+                      data: normalizePlayerData("Domoya"), // use normalized data
+                      borderColor: '#78e4eb',
+                      backgroundColor: 'rgba(120,228,235,0.2)',
+                      borderWidth: 2,
+                      pointBackgroundColor: '#78e4eb'
+                    }]
+                  },
+                  options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: { enabled: false },   // hide the gray tooltip
+                      legend:  { display: true }    
+                    },
+                    scales: {
+                      r: {
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                          display: false            
+                        },
+                        pointLabels: {
+                          display: true            // hide the axis labels
+                        },
+                        grid: {
+                          color: '#38494B'
+                        }
+                      }
+                    }
+                  }
+                });
+              }
+            // --- JC ---
+            if (document.getElementById("chart-JC")) {
+              new Chart(document.getElementById("chart-JC"), {
+                type: 'radar',
+                data: {
+                  labels: dimensionStats.map(d => d.label),
+                  datasets: [
+                    {
+                      label: 'JC',
+                      data: normalizePlayerData("JC"),
+                      borderColor: '#78e4eb',
+                      backgroundColor: 'rgba(120,228,235,0.2)',
+                      borderWidth: 2,
+                      pointBackgroundColor: '#78e4eb'
+                    }
+                  ]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: { enabled: false },   // hide the gray tooltip
+                      legend:  { display: true }    // hide the legend box
+                    },
+                    scales: {
+                      r: {
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                          display: false             // hide numeric ticks (20, 40, etc.)
+                        },
+                        pointLabels: {
+                          display: true            // hide the axis labels
+                        },
+                        grid: {
+                          color: '#38494B'
+                        }
+                      }
+                    }
+                  }
+              });
+            }
+          
+            // --- Viper3 ---
+            if (document.getElementById("chart-Viper3")) {
+              new Chart(document.getElementById("chart-Viper3"), {
+                type: 'radar',
+                data: {
+                  labels: dimensionStats.map(d => d.label),
+                  datasets: [
+                    {
+                      label: 'Viper3',
+                      data: normalizePlayerData("Viper3"),
+                      borderColor: '#78e4eb',
+                      backgroundColor: 'rgba(120,228,235,0.2)',
+                      borderWidth: 2,
+                      pointBackgroundColor: '#78e4eb'
+                    }
+                  ]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: { enabled: false },   // hide the gray tooltip
+                      legend:  { display: true }    // hide the legend box
+                    },
+                    scales: {
+                      r: {
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                          display: false             // hide numeric ticks (20, 40, etc.)
+                        },
+                        pointLabels: {
+                          display: true            // hide the axis labels
+                        },
+                        grid: {
+                          color: '#38494B'
+                        }
+                      }
+                    }
+                  }
+              });
+            }
+          
+            // --- Zuoyuan ---
+            if (document.getElementById("chart-Zuoyuan")) {
+              new Chart(document.getElementById("chart-Zuoyuan"), {
+                type: 'radar',
+                data: {
+                  labels: dimensionStats.map(d => d.label),
+                  datasets: [
+                    {
+                      label: 'Zuoyuan',
+                      data: normalizePlayerData("Zuoyuan"),
+                      borderColor: '#78e4eb',
+                      backgroundColor: 'rgba(120,228,235,0.2)',
+                      borderWidth: 2,
+                      pointBackgroundColor: '#78e4eb'
+                    }
+                  ]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: { enabled: false },   // hide the gray tooltip
+                      legend:  { display: true }    // hide the legend box
+                    },
+                    scales: {
+                      r: {
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                          display: false             // hide numeric ticks (20, 40, etc.)
+                        },
+                        pointLabels: {
+                          display: true            // hide the axis labels
+                        },
+                        grid: {
+                          color: '#38494B'
+                        }
+                      }
+                    }
+                  }
+              });
+            }
+          });
     </script>
 </body>
 </html>
