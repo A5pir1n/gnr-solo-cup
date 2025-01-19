@@ -542,6 +542,76 @@
                 </div>
             </div>
         </div>
+
+                <!-- MATCH 5 -->
+                <div class="match">
+                    <div class="match-header">January 2025 | GNR TV</div>
+                    <div class="match-body">
+                        <div class="team">Zuoyuan</div>
+                        <div class="score">2</div>
+                        <div class="divider">:</div>
+                        <div class="score">0</div>
+                        <div class="team">JC</div>
+                        <button class="details-button" onclick="toggleMatchDetails('match2-details')">&#x25BC;</button>
+                    </div>
+                    <div id="match2-details" class="match-details-container">
+                        <!-- Example small matches (2:0) -->
+                        <div class="small-match">
+                            <img class="champ-img" src="image/champs/Fiora.webp" alt="Champion" />
+                            <div class="team">Zuoyuan</div>
+                            <div class="score">1</div>
+                            <div class="divider">:</div>
+                            <div class="score">0</div>
+                            <div class="team">JC</div>
+                            <img class="champ-img" src="image/champs/Kennen.webp" alt="Champion" />
+                        </div>
+                        <div class="small-match">
+                            <img class="champ-img" src="image/champs/Jayce.webp" alt="Champion" />
+                            <div class="team">Domoya</div>
+                            <div class="score">1</div>
+                            <div class="divider">:</div>
+                            <div class="score">0</div>
+                            <div class="team">JC</div>
+                            <img class="champ-img" src="image/champs/Aatrox.webp" alt="Champion" />
+                        </div>
+                    </div>
+                </div>
+
+                                <!-- MATCH 6 -->
+                                <div class="match">
+                                    <div class="match-header">January 2025 | GNR TV</div>
+                                    <div class="match-body">
+                                        <div class="team">Viper3</div>
+                                        <div class="score">2</div>
+                                        <div class="divider">:</div>
+                                        <div class="score">0</div>
+                                        <div class="team">JC</div>
+                                        <button class="details-button" onclick="toggleMatchDetails('match2-details')">&#x25BC;</button>
+                                    </div>
+                                    <div id="match2-details" class="match-details-container">
+                                        <!-- Example small matches (2:0) -->
+                                        <div class="small-match">
+                                            <img class="champ-img" src="image/champs/Jayce.webp" alt="Champion" />
+                                            <div class="team">Zuoyuan</div>
+                                            <div class="score">1</div>
+                                            <div class="divider">:</div>
+                                            <div class="score">0</div>
+                                            <div class="team">JC</div>
+                                            <img class="champ-img" src="image/champs/Tahm Kench.webp" alt="Champion" />
+                                        </div>
+                                        <div class="small-match">
+                                            <img class="champ-img" src="image/champs/Aatrox.webp" alt="Champion" />
+                                            <div class="team">Domoya</div>
+                                            <div class="score">1</div>
+                                            <div class="divider">:</div>
+                                            <div class="score">0</div>
+                                            <div class="team">JC</div>
+                                            <img class="champ-img" src="image/champs/Renekton.webp" alt="Champion" />
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                
     </div>
 
     <!-- Placeholder for other seasons -->
@@ -605,19 +675,19 @@
                 <!-- Example data (feel free to modify) -->
                 <tr>
                     <td>Zuoyuan</td>
-                    <td>5</td>
-                    <td>4</td>
+                    <td>7</td>
+                    <td>6</td>
                     <td>1</td>
-                    <td>+3</td>
-                    <td>12</td>
+                    <td>+5</td>
+                    <td>18</td>
                 </tr>
                 <tr>
                     <td>Viper3</td>
-                    <td>6</td>
+                    <td>8</td>
+                    <td>5</td>
                     <td>3</td>
-                    <td>3</td>
-                    <td>0</td>
-                    <td>9</td>
+                    <td>2</td>
+                    <td>15</td>
                 </tr>
                 <tr>
                     <td>Domoya</td>
@@ -629,10 +699,10 @@
                 </tr>
                 <tr>
                     <td>JC</td>
-                    <td>2</td>
+                    <td>6</td>
                     <td>0</td>
-                    <td>2</td>
-                    <td>-2</td>
+                    <td>6</td>
+                    <td>-6</td>
                     <td>0</td>
                 </tr>
                 <tr>
@@ -671,7 +741,7 @@
           <div class="champs-images">
             <img src="image/champs/Camille.webp" alt="Champion 1" />
             <img src="image/champs/KSante.webp" alt="Champion 2" />
-            <img src="image/champs/test.jpg" alt="Champion 3" />
+            <img src="image/champs/Kennen.webp" alt="Champion 3" />
           </div>
         </div>
 
@@ -696,7 +766,7 @@
           <div class="champs-images">
             <img src="image/champs/Aatrox.webp" alt="Champion 1" />
             <img src="image/champs/Fiora.webp" alt="Champion 2" />
-            <img src="image/champs/Sett.webp" alt="Champion 3" />
+            <img src="image/champs/Jayce.webp" alt="Champion 3" />
           </div>
         </div>
         <div class="chart-wrapper">
@@ -893,7 +963,7 @@
             // 1) For each dimension, store a label plus its min & max (from your data range).
             const dimensionStats = [
               { label: "Winrate",         min: 0.0,       max: 0.8       },
-              { label: "Average Damage",  min: 4.846319,  max: 5.894415  },
+              { label: "Average Damage",  min: 3,  max: 5.894415  },
               { label: "Average CS",      min: 0,  max: 0.1  },
               { label: "Variation",       min: 0.5,  max: 1.0       },
               { label: "Speed",           min: 0.0,       max: 300}
@@ -903,9 +973,9 @@
             // Make sure the array order matches the dimensionStats above.
             const dataMap = {
               "Domoya": [0.428571, 5.894415, 0.061186, 0.857143, 169.33333],
-              "JC":      [0.000000, 4.846319, 0.072447, 1.000000,   0.000000],
-              "Viper3":  [0.500000, 5.180586, 0.081743, 0.666667, 128.66667],
-              "Zuoyuan": [0.800000, 5.685330, 0.048384, 1.000000, 289.00000]
+              "JC":      [0.000000, 3.885066, 0.037806, 1.000000,   0.000000],
+              "Viper3":  [0.625000, 5.455580, 0.079736, 0.500000, 185.600000],
+              "Zuoyuan": [0.857143, 5.682175, 0.047216, 0.857143, 263.500000]
             };
           
             // 3) A helper to convert raw data -> 0..100 range for each dimension.
